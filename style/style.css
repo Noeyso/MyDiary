@@ -108,6 +108,11 @@ li {
   max-width: 1000px;
 }
 
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
 /*footer*/
 .footer {
   padding: 2rem;

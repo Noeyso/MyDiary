@@ -1,15 +1,21 @@
+import { Component } from "./components/component.js";
+import { FeelingComponent } from "./components/page/item/feeling.js";
+import { ImageComponent } from "./components/page/item/image.js";
+import { Composable, PageComponent } from "./components/page/page.js";
+
 class App {
-  constructor() {
-    const main = document.querySelector(".main")! as HTMLElement;
-    const template = document.createElement("template");
-    template.innerHTML = `<ul class="page"></ul>`;
-    const container = template.content.firstElementChild! as HTMLElement;
-    const li = document.createElement("template");
-    li.innerHTML = `<li>hi</li>`;
-    console.log(template.content);
-    console.log(li);
-    container.appendChild(li.content.firstElementChild! as HTMLElement);
-    main.appendChild(container);
+  private readonly page: Component & Composable;
+  constructor(appRoot: HTMLElement) {
+    this.page = new PageComponent();
+    this.page.attachTo(appRoot);
+
+    const img = new ImageComponent(
+      "image title",
+      "https://picsum.photos/600/300"
+    );
+    this.page.addChild(img);
+    // const emoji = new FeelingComponent("happy");
+    // this.page.addChild(emoji);
   }
 }
-new App();
+new App(document.querySelector(".main")! as HTMLElement);

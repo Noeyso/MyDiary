@@ -1,7 +1,7 @@
 var BaseComponent = /** @class */ (function () {
-    function BaseComponent(innerHtml) {
+    function BaseComponent(htmlString) {
         var template = document.createElement("template");
-        template.innerHTML = innerHtml;
+        template.innerHTML = htmlString;
         this.element = template.content.firstElementChild;
     }
     BaseComponent.prototype.attachTo = function (parent, position) {
@@ -11,3 +11,4 @@ var BaseComponent = /** @class */ (function () {
     return BaseComponent;
 }());
 export { BaseComponent };
+//# sourceMappingURL=component.js.map

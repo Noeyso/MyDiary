@@ -1,13 +1,11 @@
 import { BaseComponent, Component } from "./../component.js";
 
 export interface Composable {
+  addWriting(child: Component): void;
   addChild(child: Component): void;
 }
 
-class PageItemComponent
-  extends BaseComponent<HTMLElement>
-  implements Composable
-{
+class PageItemComponent extends BaseComponent<HTMLElement> {
   constructor() {
     super(`<li class="page-item">
             <section class="page-item__body"></section>
@@ -24,16 +22,25 @@ class PageItemComponent
   }
 }
 export class PageComponent
-  extends BaseComponent<HTMLUListElement>
+  extends BaseComponent<HTMLElement>
   implements Composable
 {
   constructor() {
-    super('<ul class="page"></ul>');
+    super(`<div>
+						<h1>2022-1-15</h1>
+						<section class="writing"></section>
+						<ul class="page"></ul>
+					</div>`);
   }
 
+  addWriting(section: Component) {
+    const container = this.element.querySelector(".writing")! as HTMLElement;
+    section.attachTo(container);
+  }
   addChild(section: Component) {
+    const container = this.element.querySelector(".page")! as HTMLUListElement;
     const item = new PageItemComponent();
     item.addChild(section);
-    item.attachTo(this.element, "beforeend");
+    item.attachTo(container, "beforeend");
   }
 }

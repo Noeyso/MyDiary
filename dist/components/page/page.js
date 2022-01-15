@@ -28,12 +28,17 @@ var PageItemComponent = /** @class */ (function (_super) {
 var PageComponent = /** @class */ (function (_super) {
     __extends(PageComponent, _super);
     function PageComponent() {
-        return _super.call(this, '<ul class="page"></ul>') || this;
+        return _super.call(this, "<div>\n\t\t\t\t\t\t<h1>2022-1-15</h1>\n\t\t\t\t\t\t<section class=\"writing\"></section>\n\t\t\t\t\t\t<ul class=\"page\"></ul>\n\t\t\t\t\t</div>") || this;
     }
+    PageComponent.prototype.addWriting = function (section) {
+        var container = this.element.querySelector(".writing");
+        section.attachTo(container);
+    };
     PageComponent.prototype.addChild = function (section) {
+        var container = this.element.querySelector(".page");
         var item = new PageItemComponent();
         item.addChild(section);
-        item.attachTo(this.element, "beforeend");
+        item.attachTo(container, "beforeend");
     };
     return PageComponent;
 }(BaseComponent));

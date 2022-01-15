@@ -26,22 +26,18 @@
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: 0;
-  height: 100vh;
-}
-.app {
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  width: 100%;
-  max-width: 1000px;
   height: 100%;
+  margin: 0;
 }
 ul {
   list-style: none;
 }
 li {
+  cursor: pointer;
+}
+button {
+  border: none;
   cursor: pointer;
 }
 /*header*/
@@ -108,9 +104,28 @@ li {
   max-width: 1000px;
 }
 
+.note {
+  font-family: "kyobo";
+}
+
 .page {
   display: flex;
-  flex-direction: column;
+}
+.page-item {
+  display: flex;
+  margin-right: 2rem;
+}
+.page-item__body {
+  text-align: center;
+}
+
+.emoji,
+.weather {
+  width: 5rem;
+}
+
+.image__thumbnail {
+  width: 10rem;
 }
 
 /*footer*/

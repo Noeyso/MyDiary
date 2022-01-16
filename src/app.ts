@@ -53,6 +53,15 @@ class App {
       WeatherSectionInput,
       (input: WeatherSectionInput) => new WeatherComponent(input.select)
     );
+
+    //데모 아이템
+    this.day.addWriting(new NoteComponent("Note Title", "this is your note"));
+    this.day.addChild(
+      new ImageComponent("Image Title", "https://picsum.photos/200/300")
+    );
+    this.day.addChild(new EmotionComponent("happy"));
+
+    this.day.addChild(new WeatherComponent("windy"));
   }
 
   //다이얼로그 열기
@@ -76,7 +85,11 @@ class App {
       });
       dialog.setOnSubmitListener(() => {
         const section = makeSection(input);
-        this.day.addChild(section);
+        if (selector == "#new-note") {
+          this.day.addWriting(section);
+        } else {
+          this.day.addChild(section);
+        }
         dialog.removeFrom(this.dialogRoot);
       });
     });

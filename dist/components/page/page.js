@@ -17,7 +17,7 @@ import { BaseComponent } from "./../component.js";
 var PageItemComponent = /** @class */ (function (_super) {
     __extends(PageItemComponent, _super);
     function PageItemComponent() {
-        return _super.call(this, "<li class=\"page-item\">\n\t\t\t\t\t\t<h1 class=\"date\">2022-1-15</h1>\n\t\t\t\t\t\t<div class=\"page-item__controls\">\n              <button class=\"close\">&times;</button>\n            </div>\n            <section class=\"page-item__body\"></section>\n          </li>") || this;
+        return _super.call(this, "<li class=\"page-item\">\n\t\t\t\t\t\t<div class=\"page-item-index\">\n\t\t\t\t\t\t\t<h1 class=\"date\">2022-1-15</h1>\n\t\t\t\t\t\t\t<div class=\"page-item__controls\">\n\t\t\t\t\t\t\t\t<button class=\"close page\">&times;</button>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n            <section class=\"page-item__body\"></section>\n          </li>") || this;
     }
     PageItemComponent.prototype.addChild = function (child) {
         var container = this.element.querySelector(".page-item__body");

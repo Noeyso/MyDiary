@@ -23,15 +23,13 @@ export class InputDialog extends BaseComponent<HTMLElement> {
   constructor() {
     super(`<dialog class="dialog">
 						<div class="dialog-container">
-							<button class="dialog-close">&times;</button>
+							<button class="close">&times;</button>
     					<div class="dialog-body"></div>
       				<button class="dialog-submit">ADD</button>
 						</div>
       		</dialog>`);
 
-    const closeBtn = this.element.querySelector(
-      ".dialog-close"
-    )! as HTMLButtonElement;
+    const closeBtn = this.element.querySelector(".close")! as HTMLButtonElement;
     closeBtn.onclick = () => {
       this.closeListener && this.closeListener();
     };

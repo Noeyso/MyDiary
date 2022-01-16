@@ -119,12 +119,32 @@ button {
   flex-direction: column;
   margin-right: 2rem;
 }
+.page-item-index {
+  display: flex;
+}
 .page-item__body {
   text-align: center;
 }
 
-.day {
+.day-container {
   display: flex;
+  flex-direction: column;
+}
+.writing {
+  margin-left: 3rem;
+  align-self: start;
+}
+.day {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  align-items: end;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.day-item {
+  display: flex;
+  margin-right: 2rem;
 }
 
 .emoji,
@@ -190,21 +210,22 @@ button {
   width: 2rem;
 }
 
-.dialog-close {
+.close {
   align-self: flex-end;
-  color: white;
+  color: var(--blue-color);
   padding: 0.2rem;
   font-size: 28px;
   font-weight: bold;
   margin: 3px;
   transition: color 250ms ease;
 }
-.dialog-close:hover,
-.dialog-close:focus {
+.close:hover,
+.close:focus {
   transform: scale(1.5);
   color: var(--shadow-color);
   text-decoration: none;
 }
+
 #title,
 #url,
 #body {

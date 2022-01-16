@@ -19,7 +19,7 @@ var EmotionComponent = /** @class */ (function (_super) {
     function EmotionComponent(feeling) {
         var _this = this;
         console.log(feeling);
-        _this = _super.call(this, "<section>\n\t\t\t\t\t\t<div class=\"emojiHolder\"><img alt=\"emoji\" class=\"emoji\" /></div>\n\t\t\t\t\t\t<h4 class=\"feeling\"></h4>\n\t\t\t\t\t</section>") || this;
+        _this = _super.call(this, "<section class=\"item-container\">\n\t\t\t\t\t\t<div class=\"emojiHolder\"><img alt=\"emoji\" class=\"emoji\" /></div>\n\t\t\t\t\t\t<h4 class=\"feeling\"></h4>\n\t\t\t\t\t</section>") || this;
         var emojiElement = _this.element.querySelector(".emoji");
         var textElement = _this.element.querySelector(".feeling");
         switch (feeling) {
@@ -33,7 +33,7 @@ var EmotionComponent = /** @class */ (function (_super) {
                 break;
             case "sad":
                 emojiElement.src = "src/common/image/emoji/sad.png";
-                textElement.textContent = "Happy";
+                textElement.textContent = "Sad";
                 break;
             case "angry":
                 emojiElement.src = "src/common/image/emoji/angry.png";

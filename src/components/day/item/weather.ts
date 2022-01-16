@@ -2,7 +2,7 @@ import { BaseComponent } from "../../component.js";
 
 export class WeatherComponent extends BaseComponent<HTMLElement> {
   constructor(weather: string) {
-    super(`<section>
+    super(`<section class="item-container">
 						<div class="weatherHolder"><img alt="weather" class="weather" /></div>
 						<h4 class="comment"></h4>
 					</section>`);

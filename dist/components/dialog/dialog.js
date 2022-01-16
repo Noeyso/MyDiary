@@ -17,8 +17,8 @@ import { BaseComponent } from "./../component.js";
 var InputDialog = /** @class */ (function (_super) {
     __extends(InputDialog, _super);
     function InputDialog() {
-        var _this = _super.call(this, "<dialog class=\"dialog\">\n\t\t\t\t\t\t<div class=\"dialog-container\">\n\t\t\t\t\t\t\t<button class=\"dialog-close\">&times;</button>\n    \t\t\t\t\t<div class=\"dialog-body\"></div>\n      \t\t\t\t<button class=\"dialog-submit\">ADD</button>\n\t\t\t\t\t\t</div>\n      \t\t</dialog>") || this;
-        var closeBtn = _this.element.querySelector(".dialog-close");
+        var _this = _super.call(this, "<dialog class=\"dialog\">\n\t\t\t\t\t\t<div class=\"dialog-container\">\n\t\t\t\t\t\t\t<button class=\"close\">&times;</button>\n    \t\t\t\t\t<div class=\"dialog-body\"></div>\n      \t\t\t\t<button class=\"dialog-submit\">ADD</button>\n\t\t\t\t\t\t</div>\n      \t\t</dialog>") || this;
+        var closeBtn = _this.element.querySelector(".close");
         closeBtn.onclick = function () {
             _this.closeListener && _this.closeListener();
         };

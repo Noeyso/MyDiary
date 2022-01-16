@@ -17,7 +17,7 @@ import { BaseComponent } from "../../component.js";
 var WeatherComponent = /** @class */ (function (_super) {
     __extends(WeatherComponent, _super);
     function WeatherComponent(weather) {
-        var _this = _super.call(this, "<section>\n\t\t\t\t\t\t<div class=\"weatherHolder\"><img alt=\"weather\" class=\"weather\" /></div>\n\t\t\t\t\t\t<h4 class=\"comment\"></h4>\n\t\t\t\t\t</section>") || this;
+        var _this = _super.call(this, "<section class=\"item-container\">\n\t\t\t\t\t\t<div class=\"weatherHolder\"><img alt=\"weather\" class=\"weather\" /></div>\n\t\t\t\t\t\t<h4 class=\"comment\"></h4>\n\t\t\t\t\t</section>") || this;
         var weatherElement = _this.element.querySelector(".weather");
         var textElement = _this.element.querySelector(".comment");
         switch (weather) {

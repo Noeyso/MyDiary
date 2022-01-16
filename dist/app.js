@@ -22,6 +22,11 @@ var App = /** @class */ (function () {
         this.bindElementToDialog("#new-image", ImageSectionInput, function (input) { return new ImageComponent(input.title, input.url); });
         this.bindElementToDialog("#new-emotion", EmojiSectionInput, function (input) { return new EmotionComponent(input.select); });
         this.bindElementToDialog("#new-weather", WeatherSectionInput, function (input) { return new WeatherComponent(input.select); });
+        //데모 아이템
+        this.day.addWriting(new NoteComponent("Note Title", "this is your note"));
+        this.day.addChild(new ImageComponent("Image Title", "https://picsum.photos/200/300"));
+        this.day.addChild(new EmotionComponent("happy"));
+        this.day.addChild(new WeatherComponent("windy"));
     }
     //다이얼로그 열기
     App.prototype.bindElementToDialog = function (selector, InputComponent, makeSection) {
@@ -37,7 +42,12 @@ var App = /** @class */ (function () {
             });
             dialog.setOnSubmitListener(function () {
                 var section = makeSection(input);
-                _this.day.addChild(section);
+                if (selector == "#new-note") {
+                    _this.day.addWriting(section);
+                }
+                else {
+                    _this.day.addChild(section);
+                }
                 dialog.removeFrom(_this.dialogRoot);
             });
         });

@@ -3,7 +3,7 @@ import { BaseComponent } from "../../component.js";
 export class EmotionComponent extends BaseComponent<HTMLElement> {
   constructor(feeling: string) {
     console.log(feeling);
-    super(`<section>
+    super(`<section class="item-container">
 						<div class="emojiHolder"><img alt="emoji" class="emoji" /></div>
 						<h4 class="feeling"></h4>
 					</section>`);
@@ -26,7 +26,7 @@ export class EmotionComponent extends BaseComponent<HTMLElement> {
         break;
       case "sad":
         emojiElement.src = "src/common/image/emoji/sad.png";
-        textElement.textContent = "Happy";
+        textElement.textContent = "Sad";
         break;
       case "angry":
         emojiElement.src = "src/common/image/emoji/angry.png";

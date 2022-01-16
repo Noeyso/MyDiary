@@ -23,7 +23,7 @@ class DayItemComponent extends BaseComponent<HTMLElement> {
 }
 export class DayComponent extends BaseComponent<HTMLElement> implements Day {
   constructor() {
-    super(`<div>
+    super(`<div class="day-container">
 						<section class="writing"></section>
 						<ul class="day"></ul>
 					</div>`);

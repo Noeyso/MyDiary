@@ -28,7 +28,7 @@ var DayItemComponent = /** @class */ (function (_super) {
 var DayComponent = /** @class */ (function (_super) {
     __extends(DayComponent, _super);
     function DayComponent() {
-        return _super.call(this, "<div>\n\t\t\t\t\t\t<section class=\"writing\"></section>\n\t\t\t\t\t\t<ul class=\"day\"></ul>\n\t\t\t\t\t</div>") || this;
+        return _super.call(this, "<div class=\"day-container\">\n\t\t\t\t\t\t<section class=\"writing\"></section>\n\t\t\t\t\t\t<ul class=\"day\"></ul>\n\t\t\t\t\t</div>") || this;
     }
     DayComponent.prototype.addWriting = function (section) {
         var container = this.element.querySelector(".writing");

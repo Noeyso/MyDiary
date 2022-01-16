@@ -17,7 +17,7 @@ import { BaseComponent } from "../../component.js";
 var ImageComponent = /** @class */ (function (_super) {
     __extends(ImageComponent, _super);
     function ImageComponent(title, url) {
-        var _this = _super.call(this, "<section class=\"image\">\n\t\t\t\t\t\t<div class=\"image__holder\"><img class=\"image__thumbnail\" /></div>\n\t\t\t\t\t\t<h4 class=\"image__title\"></h4>\n\t\t\t\t\t</section>") || this;
+        var _this = _super.call(this, "<section class=\"item-container\">\n\t\t\t\t\t\t<div class=\"image__holder\"><img class=\"image__thumbnail\" /></div>\n\t\t\t\t\t\t<h4 class=\"image__title\"></h4>\n\t\t\t\t\t</section>") || this;
         var imageElement = _this.element.querySelector(".image__thumbnail");
         imageElement.src = url;
         imageElement.alt = title;

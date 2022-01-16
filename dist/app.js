@@ -16,8 +16,10 @@ var App = /** @class */ (function () {
         this.page = new PageComponent();
         this.page.attachTo(appRoot);
         this.day = new DayComponent();
+        this.day1 = new DayComponent();
         //this.day.attachTo(appRoot);
         this.page.addChild(this.day);
+        this.page.addChild(this.day1);
         this.bindElementToDialog("#new-note", TextSectionInput, function (input) { return new NoteComponent(input.title, input.body); });
         this.bindElementToDialog("#new-image", ImageSectionInput, function (input) { return new ImageComponent(input.title, input.url); });
         this.bindElementToDialog("#new-emotion", EmojiSectionInput, function (input) { return new EmotionComponent(input.select); });
@@ -27,6 +29,10 @@ var App = /** @class */ (function () {
         this.day.addChild(new ImageComponent("Image Title", "https://picsum.photos/200/300"));
         this.day.addChild(new EmotionComponent("happy"));
         this.day.addChild(new WeatherComponent("windy"));
+        this.day1.addWriting(new NoteComponent("Note Title", "this is your note"));
+        this.day1.addChild(new ImageComponent("Image Title", "https://picsum.photos/200/300"));
+        this.day1.addChild(new EmotionComponent("happy"));
+        this.day1.addChild(new WeatherComponent("windy"));
     }
     //다이얼로그 열기
     App.prototype.bindElementToDialog = function (selector, InputComponent, makeSection) {

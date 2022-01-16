@@ -1,11 +1,14 @@
 import { BaseComponent, Component } from "./../component.js";
 
+type OnCloseListener = () => void;
+
 export interface Day {
   addWriting(child: Component): void;
   addChild(child: Component): void;
 }
 
 class DayItemComponent extends BaseComponent<HTMLElement> {
+  private closeListener?: OnCloseListener;
   constructor() {
     super(`<li class="day-item">
             <section class="day-item__body"></section>
@@ -13,12 +16,20 @@ class DayItemComponent extends BaseComponent<HTMLElement> {
               <button class="close">&times;</button>
             </div>
           </li>`);
+
+    const closeBtn = this.element.querySelector(".close")! as HTMLButtonElement;
+    closeBtn.onclick = () => {
+      this.closeListener && this.closeListener();
+    };
   }
   addChild(child: Component) {
     const container = this.element.querySelector(
       ".day-item__body"
     )! as HTMLElement;
     child.attachTo(container);
+  }
+  setOnCloseListener(listener: OnCloseListener) {
+    this.closeListener = listener;
   }
 }
 export class DayComponent extends BaseComponent<HTMLElement> implements Day {
@@ -38,5 +49,8 @@ export class DayComponent extends BaseComponent<HTMLElement> implements Day {
     const item = new DayItemComponent();
     item.addChild(section);
     item.attachTo(container, "beforeend");
+    item.setOnCloseListener(() => {
+      item.removeFrom(container);
+    });
   }
 }

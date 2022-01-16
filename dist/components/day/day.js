@@ -17,11 +17,19 @@ import { BaseComponent } from "./../component.js";
 var DayItemComponent = /** @class */ (function (_super) {
     __extends(DayItemComponent, _super);
     function DayItemComponent() {
-        return _super.call(this, "<li class=\"day-item\">\n            <section class=\"day-item__body\"></section>\n            <div class=\"day-item__controls\">\n              <button class=\"close\">&times;</button>\n            </div>\n          </li>") || this;
+        var _this = _super.call(this, "<li class=\"day-item\">\n            <section class=\"day-item__body\"></section>\n            <div class=\"day-item__controls\">\n              <button class=\"close\">&times;</button>\n            </div>\n          </li>") || this;
+        var closeBtn = _this.element.querySelector(".close");
+        closeBtn.onclick = function () {
+            _this.closeListener && _this.closeListener();
+        };
+        return _this;
     }
     DayItemComponent.prototype.addChild = function (child) {
         var container = this.element.querySelector(".day-item__body");
         child.attachTo(container);
+    };
+    DayItemComponent.prototype.setOnCloseListener = function (listener) {
+        this.closeListener = listener;
     };
     return DayItemComponent;
 }(BaseComponent));
@@ -39,6 +47,9 @@ var DayComponent = /** @class */ (function (_super) {
         var item = new DayItemComponent();
         item.addChild(section);
         item.attachTo(container, "beforeend");
+        item.setOnCloseListener(function () {
+            item.removeFrom(container);
+        });
     };
     return DayComponent;
 }(BaseComponent));

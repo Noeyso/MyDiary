@@ -26,12 +26,15 @@ type InputComponentConstructor<
 class App {
   private readonly page: Component & Composable;
   private readonly day: Component & Day;
+  private readonly day1: Component & Day;
   constructor(private appRoot: HTMLElement, private dialogRoot: HTMLElement) {
     this.page = new PageComponent();
     this.page.attachTo(appRoot);
     this.day = new DayComponent();
+    this.day1 = new DayComponent();
     //this.day.attachTo(appRoot);
     this.page.addChild(this.day);
+    this.page.addChild(this.day1);
 
     this.bindElementToDialog<TextSectionInput>(
       "#new-note",
@@ -60,8 +63,15 @@ class App {
       new ImageComponent("Image Title", "https://picsum.photos/200/300")
     );
     this.day.addChild(new EmotionComponent("happy"));
-
     this.day.addChild(new WeatherComponent("windy"));
+
+    this.day1.addWriting(new NoteComponent("Note Title", "this is your note"));
+    this.day1.addChild(
+      new ImageComponent("Image Title", "https://picsum.photos/200/300")
+    );
+    this.day1.addChild(new EmotionComponent("happy"));
+
+    this.day1.addChild(new WeatherComponent("windy"));
   }
 
   //다이얼로그 열기

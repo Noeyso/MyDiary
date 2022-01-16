@@ -17,7 +17,7 @@ import { BaseComponent } from "./../component.js";
 var PageItemComponent = /** @class */ (function (_super) {
     __extends(PageItemComponent, _super);
     function PageItemComponent() {
-        return _super.call(this, "<li class=\"page-item\">\n            <section class=\"page-item__body\"></section>\n            <div class=\"page-item__controls\">\n              <button class=\"close\">&times;</button>\n            </div>\n          </li>") || this;
+        return _super.call(this, "<li class=\"page-item\">\n\t\t\t\t\t\t<h1 class=\"date\">2022-1-15</h1>\n\t\t\t\t\t\t<div class=\"page-item__controls\">\n              <button class=\"close\">&times;</button>\n            </div>\n            <section class=\"page-item__body\"></section>\n          </li>") || this;
     }
     PageItemComponent.prototype.addChild = function (child) {
         var container = this.element.querySelector(".page-item__body");
@@ -28,12 +28,8 @@ var PageItemComponent = /** @class */ (function (_super) {
 var PageComponent = /** @class */ (function (_super) {
     __extends(PageComponent, _super);
     function PageComponent() {
-        return _super.call(this, "<div>\n\t\t\t\t\t\t<h1>2022-1-15</h1>\n\t\t\t\t\t\t<section class=\"writing\"></section>\n\t\t\t\t\t\t<ul class=\"page\"></ul>\n\t\t\t\t\t</div>") || this;
+        return _super.call(this, "<div>\n\t\t\t\t\t\t<ul class=\"page\"></ul>\n\t\t\t\t\t</div>") || this;
     }
-    PageComponent.prototype.addWriting = function (section) {
-        var container = this.element.querySelector(".writing");
-        section.attachTo(container);
-    };
     PageComponent.prototype.addChild = function (section) {
         var container = this.element.querySelector(".page");
         var item = new PageItemComponent();

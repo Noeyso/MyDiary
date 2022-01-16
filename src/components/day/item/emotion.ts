@@ -1,7 +1,8 @@
 import { BaseComponent } from "../../component.js";
 
-export class FeelingComponent extends BaseComponent<HTMLElement> {
+export class EmotionComponent extends BaseComponent<HTMLElement> {
   constructor(feeling: string) {
+    console.log(feeling);
     super(`<section>
 						<div class="emojiHolder"><img alt="emoji" class="emoji" /></div>
 						<h4 class="feeling"></h4>

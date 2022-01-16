@@ -20,7 +20,7 @@ export class WeatherComponent extends BaseComponent<HTMLElement> {
         textElement.textContent = "Sunny";
         break;
       case "cloudy":
-        weatherElement.src = "src/common/image/weather/clouds.png";
+        weatherElement.src = "src/common/image/weather/cloudy.png";
         textElement.textContent = "Cloudy";
         break;
       case "windy":
@@ -40,7 +40,7 @@ export class WeatherComponent extends BaseComponent<HTMLElement> {
         textElement.textContent = "Stormy";
         break;
       case "fog":
-        weatherElement.src = "src/common/image/weather/mist.png";
+        weatherElement.src = "src/common/image/weather/fog.png";
         textElement.textContent = "Fog";
         break;
       case "hot":

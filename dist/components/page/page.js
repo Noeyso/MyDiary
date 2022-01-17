@@ -14,11 +14,29 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import { BaseComponent } from "./../component.js";
+import { NothingComponent } from "./nothing.js";
 var PageItemComponent = /** @class */ (function (_super) {
     __extends(PageItemComponent, _super);
-    function PageItemComponent() {
-        return _super.call(this, "<li class=\"page-item\">\n\t\t\t\t\t\t<div class=\"page-item-index\">\n\t\t\t\t\t\t\t<h1 class=\"date\">2022-1-15</h1>\n\t\t\t\t\t\t\t<div class=\"page-item__controls\">\n\t\t\t\t\t\t\t\t<button class=\"close page\">&times;</button>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n            <section class=\"page-item__body\"></section>\n          </li>") || this;
+    function PageItemComponent(dateString) {
+        var _this = _super.call(this, "<li class=\"page-item\">\n\t\t\t\t\t\t<div class=\"page-item-index\">\n\t\t\t\t\t\t\t<h1 class=\"date\"></h1>\n\t\t\t\t\t\t\t<div class=\"page-item__controls\">\n\t\t\t\t\t\t\t\t<button class=\"close page\">&times;</button>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n            <section class=\"page-item__body\"></section>\n          </li>") || this;
+        var closeBtn = _this.element.querySelector(".close");
+        closeBtn.onclick = function () {
+            _this.closeListener && _this.closeListener();
+        };
+        var date = _this.element.querySelector(".date");
+        date.textContent = dateString;
+        return _this;
     }
+    PageItemComponent.prototype.setOnCloseListener = function (listener) {
+        this.closeListener = listener;
+    };
+    PageItemComponent.prototype.noChild = function () {
+        var idx = this.element.querySelector(".page-item-index");
+        this.element.removeChild(idx);
+        var container = this.element.querySelector(".page-item__body");
+        var nothingElement = new NothingComponent();
+        nothingElement.attachTo(container);
+    };
     PageItemComponent.prototype.addChild = function (child) {
         var container = this.element.querySelector(".page-item__body");
         child.attachTo(container);
@@ -28,13 +46,26 @@ var PageItemComponent = /** @class */ (function (_super) {
 var PageComponent = /** @class */ (function (_super) {
     __extends(PageComponent, _super);
     function PageComponent() {
-        return _super.call(this, "<div>\n\t\t\t\t\t\t<ul class=\"page\"></ul>\n\t\t\t\t\t</div>") || this;
+        return _super.call(this, "<ul class=\"page\"></ul>") || this;
     }
+    PageComponent.prototype.noChild = function () {
+        var item = new PageItemComponent("");
+        item.noChild();
+        item.attachTo(this.element, "beforeend");
+    };
     PageComponent.prototype.addChild = function (section) {
-        var container = this.element.querySelector(".page");
-        var item = new PageItemComponent();
+        var _this = this;
+        var date = new Date();
+        var item = new PageItemComponent(date.toLocaleString());
         item.addChild(section);
-        item.attachTo(container, "beforeend");
+        item.attachTo(this.element, "beforeend");
+        item.setOnCloseListener(function () {
+            item.removeFrom(_this.element);
+            if (!_this.element.hasChildNodes()) {
+                console.log("들어옴");
+                _this.noChild();
+            }
+        });
     };
     return PageComponent;
 }(BaseComponent));

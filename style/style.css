@@ -33,6 +33,7 @@ body {
   padding: 0;
 }
 ul {
+  margin: 0;
   list-style: none;
 }
 li {
@@ -96,9 +97,9 @@ button {
 }
 /*main*/
 .main-container {
+  height: 100%;
   display: flex;
   justify-content: center;
-  height: 100%;
   background-color: var(--main-bg-color);
 }
 .main {
@@ -112,8 +113,13 @@ button {
 }
 
 .page {
+  width: 100%;
+  min-height: 30rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .page-item {
   display: flex;
@@ -249,6 +255,7 @@ button {
 
 /*footer*/
 .footer {
+  width: 100%;
   padding: 2rem;
   text-align: center;
   color: var(--main-bg-color);

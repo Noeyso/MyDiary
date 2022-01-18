@@ -29,6 +29,9 @@ var App = /** @class */ (function () {
         this.day.addChild(new ImageComponent("Image Title", "https://picsum.photos/200/300"));
         this.day.addChild(new EmotionComponent("happy"));
         this.day.addChild(new WeatherComponent("windy"));
+        this.day.addChild(new ImageComponent("Image Title", "https://picsum.photos/200/300"));
+        this.day.addChild(new EmotionComponent("happy"));
+        this.day.addChild(new WeatherComponent("windy"));
         this.day1.addWriting(new NoteComponent("Note Title", "this is your note"));
         this.day1.addChild(new ImageComponent("Image Title", "https://picsum.photos/200/300"));
         this.day1.addChild(new EmotionComponent("happy"));

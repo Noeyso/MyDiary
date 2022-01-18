@@ -31,6 +31,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden !important;
 }
 ul {
   margin: 0;
@@ -43,6 +44,9 @@ button {
   background: transparent;
   border: none;
   cursor: pointer;
+}
+h1 {
+  margin: 0;
 }
 /*header*/
 .header-container {
@@ -61,6 +65,9 @@ button {
   height: 15rem;
   font-family: "kyobo";
 }
+.header-title {
+  margin-left: 5rem;
+}
 .title {
   font-size: 2.5rem;
   margin: 0;
@@ -74,7 +81,8 @@ button {
 .icon {
   width: 2rem;
 }
-.custom-shape-divider-bottom-1642093947 {
+.custom-shape-divider-bottom {
+  display: flex;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -84,7 +92,7 @@ button {
   transform: rotate(180deg);
 }
 
-.custom-shape-divider-bottom-1642093947 svg {
+.custom-shape-divider-bottom svg {
   position: relative;
   display: block;
   width: calc(123% + 1.3px);
@@ -92,9 +100,10 @@ button {
   transform: rotateY(180deg);
 }
 
-.custom-shape-divider-bottom-1642093947 .shape-fill {
+.custom-shape-divider-bottom .shape-fill {
   fill: var(--main-bg-color);
 }
+
 /*main*/
 .main-container {
   height: 100%;
@@ -104,8 +113,10 @@ button {
 }
 .main {
   display: flex;
+  justify-content: center;
   width: 100%;
-  max-width: 1000px;
+  max-width: 100%;
+  overflow-x: hidden !important;
 }
 
 .note {
@@ -113,24 +124,22 @@ button {
 }
 
 .page {
-  width: 100%;
-  min-height: 30rem;
+  height: auto;
+  min-height: 450px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  margin-right: 1rem;
 }
+
 .page-item {
   display: flex;
   flex-direction: column;
   margin-right: 2rem;
 }
 .page-item-index {
+  width: 100%;
   display: flex;
-}
-.page-item__body {
-  text-align: center;
+  justify-content: space-between;
 }
 
 .day-container {
@@ -268,4 +277,36 @@ button {
   background: linear-gradient(to left, #4568dc, #b06ab3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@media (min-width: 20rem) and (max-width: 48rem) {
+  .header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .custom-shape-divider-bottom svg {
+    height: 30px;
+  }
+  .menu {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .page {
+    max-width: 100%;
+  }
+  .day {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 48rem) {
+  .page {
+    max-width: 100%;
+  }
+  .day {
+    max-width: 100%;
+  }
 }

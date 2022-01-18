@@ -18,7 +18,7 @@ import { NothingComponent } from "./nothing.js";
 var PageItemComponent = /** @class */ (function (_super) {
     __extends(PageItemComponent, _super);
     function PageItemComponent(dateString) {
-        var _this = _super.call(this, "<li class=\"page-item\">\n\t\t\t\t\t\t<div class=\"page-item-index\">\n\t\t\t\t\t\t\t<h1 class=\"date\"></h1>\n\t\t\t\t\t\t\t<div class=\"page-item__controls\">\n\t\t\t\t\t\t\t\t<button class=\"close page\">&times;</button>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n            <section class=\"page-item__body\"></section>\n          </li>") || this;
+        var _this = _super.call(this, "<li class=\"page-item\">\n\t\t\t\t\t\t<div class=\"page-item-index\">\n\t\t\t\t\t\t\t<h1 class=\"date\"></h1>\n\t\t\t\t\t\t\t<div class=\"page-item__controls\">\n\t\t\t\t\t\t\t\t<button class=\"close\">&times;</button>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n            <section class=\"page-item__body\"></section>\n          </li>") || this;
         var closeBtn = _this.element.querySelector(".close");
         closeBtn.onclick = function () {
             _this.closeListener && _this.closeListener();

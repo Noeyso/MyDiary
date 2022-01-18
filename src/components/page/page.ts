@@ -17,7 +17,7 @@ class PageItemComponent
 						<div class="page-item-index">
 							<h1 class="date"></h1>
 							<div class="page-item__controls">
-								<button class="close page">&times;</button>
+								<button class="close">&times;</button>
 							</div>
 						</div>
             <section class="page-item__body"></section>

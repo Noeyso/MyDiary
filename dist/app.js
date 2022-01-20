@@ -17,21 +17,25 @@ var App = /** @class */ (function () {
         this.page.attachTo(appRoot);
         this.day = new DayComponent();
         this.day1 = new DayComponent();
-        //this.day.attachTo(appRoot);
-        this.page.addChild(this.day);
-        this.page.addChild(this.day1);
+        this.today = this.makeDayString(new Date());
+        this.page.addChild(this.day1, this.makeDayString(new Date(2022, 0, 2)));
+        this.page.addChild(this.day, this.today);
         this.bindElementToDialog("#new-note", TextSectionInput, function (input) { return new NoteComponent(input.title, input.body); });
         this.bindElementToDialog("#new-image", ImageSectionInput, function (input) { return new ImageComponent(input.title, input.url); });
         this.bindElementToDialog("#new-emotion", EmojiSectionInput, function (input) { return new EmotionComponent(input.select); });
         this.bindElementToDialog("#new-weather", WeatherSectionInput, function (input) { return new WeatherComponent(input.select); });
         //데모 아이템
-        this.day.addWriting(new NoteComponent("Note Title", "this is your note"));
-        this.day.addChild(new ImageComponent("Image Title", "https://picsum.photos/200/300"));
-        this.day.addChild(new EmotionComponent("happy"));
-        this.day.addChild(new WeatherComponent("windy"));
-        this.day.addChild(new ImageComponent("Image Title", "https://picsum.photos/200/300"));
-        this.day.addChild(new EmotionComponent("happy"));
-        this.day.addChild(new WeatherComponent("windy"));
+        // this.day.addWriting(new NoteComponent("Note Title", "this is your note"));
+        // this.day.addChild(
+        //   new ImageComponent("Image Title", "https://picsum.photos/200/300")
+        // );
+        // this.day.addChild(new EmotionComponent("happy"));
+        // this.day.addChild(new WeatherComponent("windy"));
+        // this.day.addChild(
+        //   new ImageComponent("Image Title", "https://picsum.photos/200/300")
+        // );
+        // this.day.addChild(new EmotionComponent("happy"));
+        // this.day.addChild(new WeatherComponent("windy"));
         this.day1.addWriting(new NoteComponent("Note Title", "this is your note"));
         this.day1.addChild(new ImageComponent("Image Title", "https://picsum.photos/200/300"));
         this.day1.addChild(new EmotionComponent("happy"));
@@ -50,6 +54,26 @@ var App = /** @class */ (function () {
                 dialog.removeFrom(_this.dialogRoot);
             });
             dialog.setOnSubmitListener(function () {
+                var pageItem = document.getElementsByClassName("page-item");
+                console.log(pageItem);
+                console.log(pageItem[0]);
+                var dates = document.getElementsByClassName("date");
+                console.log(dates.length);
+                //console.log(dates[0].textContent);
+                if (dates.length === 0) {
+                    console.log("새로생성");
+                    var nothing = document.querySelector("noChld");
+                    _this.day = new DayComponent();
+                    _this.page.addChild(_this.day, _this.today);
+                }
+                else {
+                    if (dates[0].textContent !== _this.today) {
+                        console.log("없음");
+                        _this.day = new DayComponent();
+                        _this.page.addChild(_this.day, _this.today);
+                        console.log(_this.page);
+                    }
+                }
                 var section = makeSection(input);
                 if (selector == "#new-note") {
                     _this.day.addWriting(section);
@@ -60,6 +84,13 @@ var App = /** @class */ (function () {
                 dialog.removeFrom(_this.dialogRoot);
             });
         });
+    };
+    App.prototype.makeDayString = function (day) {
+        var year = day.getFullYear();
+        var month = day.getMonth() + 1;
+        var date = day.getDate();
+        var dayString = "".concat(year, "-").concat(month >= 10 ? month : "0" + month, "-").concat(date >= 10 ? date : "0" + date);
+        return dayString;
     };
     return App;
 }());

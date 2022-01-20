@@ -115,7 +115,7 @@ h1 {
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 100%;
+  max-width: 1000px;
   overflow-x: hidden !important;
 }
 
@@ -124,6 +124,7 @@ h1 {
 }
 
 .page {
+  width: 100%;
   height: auto;
   min-height: 450px;
   display: flex;
@@ -134,7 +135,9 @@ h1 {
 .page-item {
   display: flex;
   flex-direction: column;
-  margin-right: 2rem;
+  margin-top: 5rem;
+  padding: 1rem;
+  background: rgba(197, 217, 253, 0.3);
 }
 .page-item-index {
   width: 100%;
@@ -161,6 +164,12 @@ h1 {
 .day-item {
   display: flex;
   margin-right: 2rem;
+}
+.item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
 }
 
 .emoji,

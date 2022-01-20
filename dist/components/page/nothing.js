@@ -17,7 +17,7 @@ import { BaseComponent } from "../component.js";
 var NothingComponent = /** @class */ (function (_super) {
     __extends(NothingComponent, _super);
     function NothingComponent() {
-        return _super.call(this, "<div>\uC77C\uAE30\uAC00 \uC5C6\uC5B4\uC694,, \uCD94\uAC00\uD574\uC8FC\uC138\uC694 :)</div>") || this;
+        return _super.call(this, "<div class=\"noChild\">\uC77C\uAE30\uAC00 \uC5C6\uC5B4\uC694,, \uCD94\uAC00\uD574\uC8FC\uC138\uC694 :)</div>") || this;
     }
     return NothingComponent;
 }(BaseComponent));

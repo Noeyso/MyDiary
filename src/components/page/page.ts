@@ -3,8 +3,7 @@ import { NothingComponent } from "./nothing.js";
 type OnCloseListener = () => void;
 
 export interface Composable {
-  noChild(): void;
-  addChild(child: Component): void;
+  addChild(child: Component, dayString: string): void;
 }
 
 class PageItemComponent
@@ -32,15 +31,7 @@ class PageItemComponent
   setOnCloseListener(listener: OnCloseListener) {
     this.closeListener = listener;
   }
-  noChild() {
-    const idx = this.element.querySelector(".page-item-index")! as HTMLElement;
-    this.element.removeChild(idx);
-    const container = this.element.querySelector(
-      ".page-item__body"
-    )! as HTMLElement;
-    const nothingElement = new NothingComponent();
-    nothingElement.attachTo(container);
-  }
+
   addChild(child: Component) {
     const container = this.element.querySelector(
       ".page-item__body"
@@ -52,21 +43,25 @@ export class PageComponent
   extends BaseComponent<HTMLElement>
   implements Composable
 {
+  private nothingElement: Component;
   constructor() {
     super(`<ul class="page"></ul>`);
+    this.nothingElement = new NothingComponent();
   }
 
   noChild() {
-    const item = new PageItemComponent("");
-    item.noChild();
-    item.attachTo(this.element, "beforeend");
+    this.nothingElement.attachTo(this.element);
   }
 
-  addChild(section: Component) {
-    const date = new Date();
-    const item = new PageItemComponent(date.toLocaleString());
+  addChild(section: Component, dayString: string) {
+    const nothing = this.element.querySelector(".noChild");
+    console.log(nothing);
+    if (nothing !== null) {
+      this.element.removeChild(nothing);
+    }
+    const item = new PageItemComponent(dayString);
     item.addChild(section);
-    item.attachTo(this.element, "beforeend");
+    item.attachTo(this.element, "afterbegin");
     item.setOnCloseListener(() => {
       item.removeFrom(this.element);
       if (!this.element.hasChildNodes()) {

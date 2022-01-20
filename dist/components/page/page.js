@@ -30,13 +30,6 @@ var PageItemComponent = /** @class */ (function (_super) {
     PageItemComponent.prototype.setOnCloseListener = function (listener) {
         this.closeListener = listener;
     };
-    PageItemComponent.prototype.noChild = function () {
-        var idx = this.element.querySelector(".page-item-index");
-        this.element.removeChild(idx);
-        var container = this.element.querySelector(".page-item__body");
-        var nothingElement = new NothingComponent();
-        nothingElement.attachTo(container);
-    };
     PageItemComponent.prototype.addChild = function (child) {
         var container = this.element.querySelector(".page-item__body");
         child.attachTo(container);
@@ -46,19 +39,23 @@ var PageItemComponent = /** @class */ (function (_super) {
 var PageComponent = /** @class */ (function (_super) {
     __extends(PageComponent, _super);
     function PageComponent() {
-        return _super.call(this, "<ul class=\"page\"></ul>") || this;
+        var _this = _super.call(this, "<ul class=\"page\"></ul>") || this;
+        _this.nothingElement = new NothingComponent();
+        return _this;
     }
     PageComponent.prototype.noChild = function () {
-        var item = new PageItemComponent("");
-        item.noChild();
-        item.attachTo(this.element, "beforeend");
+        this.nothingElement.attachTo(this.element);
     };
-    PageComponent.prototype.addChild = function (section) {
+    PageComponent.prototype.addChild = function (section, dayString) {
         var _this = this;
-        var date = new Date();
-        var item = new PageItemComponent(date.toLocaleString());
+        var nothing = this.element.querySelector(".noChild");
+        console.log(nothing);
+        if (nothing !== null) {
+            this.element.removeChild(nothing);
+        }
+        var item = new PageItemComponent(dayString);
         item.addChild(section);
-        item.attachTo(this.element, "beforeend");
+        item.attachTo(this.element, "afterbegin");
         item.setOnCloseListener(function () {
             item.removeFrom(_this.element);
             if (!_this.element.hasChildNodes()) {

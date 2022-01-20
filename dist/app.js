@@ -54,15 +54,9 @@ var App = /** @class */ (function () {
                 dialog.removeFrom(_this.dialogRoot);
             });
             dialog.setOnSubmitListener(function () {
-                var pageItem = document.getElementsByClassName("page-item");
-                console.log(pageItem);
-                console.log(pageItem[0]);
                 var dates = document.getElementsByClassName("date");
-                console.log(dates.length);
-                //console.log(dates[0].textContent);
                 if (dates.length === 0) {
                     console.log("새로생성");
-                    var nothing = document.querySelector("noChld");
                     _this.day = new DayComponent();
                     _this.page.addChild(_this.day, _this.today);
                 }
@@ -76,7 +70,16 @@ var App = /** @class */ (function () {
                 }
                 var section = makeSection(input);
                 if (selector == "#new-note") {
-                    _this.day.addWriting(section);
+                    var pageItem = document.getElementsByClassName("page-item")[0];
+                    var writing = pageItem.getElementsByClassName("note-container");
+                    console.log(writing.length);
+                    console.log(pageItem);
+                    if (writing.length > 0) {
+                        alert("일기당 하나의 글만 가능합니다.");
+                    }
+                    else {
+                        _this.day.addWriting(section);
+                    }
                 }
                 else {
                     _this.day.addChild(section);

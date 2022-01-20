@@ -1,9 +1,10 @@
 import { BaseComponent } from "../../component.js";
-
 export class NoteComponent extends BaseComponent<HTMLElement> {
   constructor(title: string, content: string) {
     super(`<section class="note-container">
-						<h2 class="note__title"></h2>
+						<div class="note__title_container">
+							<h2 class="note__title"></h2>
+						</div>
 						<p class="note__content"></p>
 					</section>`);
 

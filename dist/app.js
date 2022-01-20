@@ -19,7 +19,8 @@ var App = /** @class */ (function () {
         this.day1 = new DayComponent();
         this.today = this.makeDayString(new Date());
         this.page.addChild(this.day1, this.makeDayString(new Date(2022, 0, 13)));
-        this.bindElementToDialog("#new-note", TextSectionInput, function (input) { return new NoteComponent(input.title, input.body); });
+        this.bindNoteElementToDialog("#new-note");
+        //this.bindNoteElementToDialog("#edit-button");
         this.bindElementToDialog("#new-image", ImageSectionInput, function (input) { return new ImageComponent(input.title, input.url); });
         this.bindElementToDialog("#new-emotion", EmojiSectionInput, function (input) { return new EmotionComponent(input.select); });
         this.bindElementToDialog("#new-weather", WeatherSectionInput, function (input) { return new WeatherComponent(input.select); });
@@ -29,6 +30,52 @@ var App = /** @class */ (function () {
         this.day1.addChild(new EmotionComponent("happy"));
         this.day1.addChild(new WeatherComponent("windy"));
     }
+    App.prototype.bindNoteElementToDialog = function (selector) {
+        var _this = this;
+        var element = document.querySelector(selector);
+        element.addEventListener("click", function () {
+            var dates = document.getElementsByClassName("date");
+            var pageItem = document.getElementsByClassName("page-item")[0];
+            var writings = pageItem.getElementsByClassName("note-container");
+            var dialog = new InputDialog();
+            var input = new TextSectionInput();
+            if (dates.length > 0) {
+                if (dates[0].textContent === _this.today) {
+                    if (writings.length > 0) {
+                        var writing = writings[0];
+                        var title = writing.querySelector(".note__title");
+                        var body = writing.querySelector(".note__content");
+                        input.title = title.textContent || "";
+                        input.body = body.textContent || "";
+                    }
+                }
+            }
+            dialog.addChild(input);
+            dialog.attachTo(_this.dialogRoot);
+            dialog.setOnCloseListener(function () {
+                dialog.removeFrom(_this.dialogRoot);
+            });
+            dialog.setOnSubmitListener(function () {
+                if (dates.length === 0) {
+                    _this.day = new DayComponent();
+                    _this.page.addChild(_this.day, _this.today);
+                }
+                else {
+                    if (dates[0].textContent !== _this.today) {
+                        _this.day = new DayComponent();
+                        _this.page.addChild(_this.day, _this.today);
+                    }
+                }
+                if (input.title == "" || input.body == "") {
+                    alert("제목과 내용을 모두 적어주세요.");
+                }
+                else {
+                    _this.day.addWriting(new NoteComponent(input.title, input.body));
+                    dialog.removeFrom(_this.dialogRoot);
+                }
+            });
+        });
+    };
     //다이얼로그 열기
     App.prototype.bindElementToDialog = function (selector, InputComponent, makeSection) {
         var _this = this;
@@ -54,19 +101,7 @@ var App = /** @class */ (function () {
                     }
                 }
                 var section = makeSection(input);
-                if (selector == "#new-note") {
-                    var pageItem = document.getElementsByClassName("page-item")[0];
-                    var writing = pageItem.getElementsByClassName("note-container");
-                    if (writing.length > 0) {
-                        alert("일기당 하나의 글만 가능합니다.");
-                    }
-                    else {
-                        _this.day.addWriting(section);
-                    }
-                }
-                else {
-                    _this.day.addChild(section);
-                }
+                _this.day.addChild(section);
                 dialog.removeFrom(_this.dialogRoot);
             });
         });

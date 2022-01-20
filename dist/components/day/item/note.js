@@ -17,7 +17,7 @@ import { BaseComponent } from "../../component.js";
 var NoteComponent = /** @class */ (function (_super) {
     __extends(NoteComponent, _super);
     function NoteComponent(title, content) {
-        var _this = _super.call(this, "<section class=\"note-container\">\n\t\t\t\t\t\t<h2 class=\"note__title\"></h2>\n\t\t\t\t\t\t<p class=\"note__content\"></p>\n\t\t\t\t\t</section>") || this;
+        var _this = _super.call(this, "<section class=\"note-container\">\n\t\t\t\t\t\t<div class=\"note__title_container\">\n\t\t\t\t\t\t\t<h2 class=\"note__title\"></h2>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<p class=\"note__content\"></p>\n\t\t\t\t\t</section>") || this;
         var titleElement = _this.element.querySelector(".note__title");
         titleElement.textContent = title;
         var contentElement = _this.element.querySelector(".note__content");

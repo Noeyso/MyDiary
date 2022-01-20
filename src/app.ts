@@ -35,11 +35,8 @@ class App {
 
     this.today = this.makeDayString(new Date());
     this.page.addChild(this.day1, this.makeDayString(new Date(2022, 0, 13)));
-    this.bindElementToDialog<TextSectionInput>(
-      "#new-note",
-      TextSectionInput,
-      (input: TextSectionInput) => new NoteComponent(input.title, input.body)
-    );
+    this.bindNoteElementToDialog("#new-note");
+    //this.bindNoteElementToDialog("#edit-button");
     this.bindElementToDialog<ImageSectionInput>(
       "#new-image",
       ImageSectionInput,
@@ -66,6 +63,60 @@ class App {
     this.day1.addChild(new WeatherComponent("windy"));
   }
 
+  private bindNoteElementToDialog(selector: string) {
+    const element = document.querySelector(selector)! as HTMLElement;
+    element.addEventListener("click", () => {
+      const dates = document.getElementsByClassName("date");
+      const pageItem = document.getElementsByClassName(
+        "page-item"
+      )[0]! as HTMLElement;
+      const writings = pageItem.getElementsByClassName("note-container");
+
+      const dialog = new InputDialog();
+      const input = new TextSectionInput();
+
+      if (dates.length > 0) {
+        if (dates[0].textContent === this.today) {
+          if (writings.length > 0) {
+            const writing = writings[0]! as HTMLElement;
+            const title = writing.querySelector(
+              ".note__title"
+            )! as HTMLHeadElement;
+            const body = writing.querySelector(
+              ".note__content"
+            )! as HTMLParagraphElement;
+
+            input.title = title.textContent || "";
+            input.body = body.textContent || "";
+          }
+        }
+      }
+      dialog.addChild(input);
+      dialog.attachTo(this.dialogRoot);
+
+      dialog.setOnCloseListener(() => {
+        dialog.removeFrom(this.dialogRoot);
+      });
+      dialog.setOnSubmitListener(() => {
+        if (dates.length === 0) {
+          this.day = new DayComponent();
+          this.page.addChild(this.day, this.today);
+        } else {
+          if (dates[0].textContent !== this.today) {
+            this.day = new DayComponent();
+            this.page.addChild(this.day, this.today);
+          }
+        }
+        if (input.title == "" || input.body == "") {
+          alert("제목과 내용을 모두 적어주세요.");
+        } else {
+          this.day.addWriting(new NoteComponent(input.title, input.body));
+          dialog.removeFrom(this.dialogRoot);
+        }
+      });
+    });
+  }
+
   //다이얼로그 열기
   private bindElementToDialog<
     T extends (TextData | ImageData | EmojiData | WeatherData) & Component
@@ -78,7 +129,6 @@ class App {
     element.addEventListener("click", () => {
       const dialog = new InputDialog();
       const input = new InputComponent();
-
       dialog.addChild(input);
       dialog.attachTo(this.dialogRoot);
 
@@ -97,20 +147,7 @@ class App {
           }
         }
         const section = makeSection(input);
-        if (selector == "#new-note") {
-          const pageItem = document.getElementsByClassName(
-            "page-item"
-          )[0]! as HTMLElement;
-          const writing = pageItem.getElementsByClassName("note-container");
-
-          if (writing.length > 0) {
-            alert("일기당 하나의 글만 가능합니다.");
-          } else {
-            this.day.addWriting(section);
-          }
-        } else {
-          this.day.addChild(section);
-        }
+        this.day.addChild(section);
         dialog.removeFrom(this.dialogRoot);
       });
     });

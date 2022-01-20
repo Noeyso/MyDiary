@@ -24,4 +24,12 @@ export class TextSectionInput
     const element = this.element.querySelector("#body")! as HTMLInputElement;
     return element.value;
   }
+  set title(text: string) {
+    const element = this.element.querySelector("#title")! as HTMLInputElement;
+    element.value = text;
+  }
+  set body(text: string) {
+    const element = this.element.querySelector("#body")! as HTMLInputElement;
+    element.value = text;
+  }
 }

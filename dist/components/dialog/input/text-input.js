@@ -24,6 +24,10 @@ var TextSectionInput = /** @class */ (function (_super) {
             var element = this.element.querySelector("#title");
             return element.value;
         },
+        set: function (text) {
+            var element = this.element.querySelector("#title");
+            element.value = text;
+        },
         enumerable: false,
         configurable: true
     });
@@ -31,6 +35,10 @@ var TextSectionInput = /** @class */ (function (_super) {
         get: function () {
             var element = this.element.querySelector("#body");
             return element.value;
+        },
+        set: function (text) {
+            var element = this.element.querySelector("#body");
+            element.value = text;
         },
         enumerable: false,
         configurable: true

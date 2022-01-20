@@ -1,4 +1,3 @@
-import { SelectSectionInput } from "./components/dialog/input/select-input";
 import { Component } from "./components/component.js";
 import {
   ImageData,
@@ -35,9 +34,7 @@ class App {
     this.day1 = new DayComponent();
 
     this.today = this.makeDayString(new Date());
-    this.page.addChild(this.day1, this.makeDayString(new Date(2022, 0, 2)));
-    this.page.addChild(this.day, this.today);
-
+    this.page.addChild(this.day1, this.makeDayString(new Date(2022, 0, 13)));
     this.bindElementToDialog<TextSectionInput>(
       "#new-note",
       TextSectionInput,
@@ -60,18 +57,6 @@ class App {
     );
 
     //데모 아이템
-    // this.day.addWriting(new NoteComponent("Note Title", "this is your note"));
-    // this.day.addChild(
-    //   new ImageComponent("Image Title", "https://picsum.photos/200/300")
-    // );
-    // this.day.addChild(new EmotionComponent("happy"));
-    // this.day.addChild(new WeatherComponent("windy"));
-    // this.day.addChild(
-    //   new ImageComponent("Image Title", "https://picsum.photos/200/300")
-    // );
-    // this.day.addChild(new EmotionComponent("happy"));
-    // this.day.addChild(new WeatherComponent("windy"));
-
     this.day1.addWriting(new NoteComponent("Note Title", "this is your note"));
     this.day1.addChild(
       new ImageComponent("Image Title", "https://picsum.photos/200/300")
@@ -103,15 +88,12 @@ class App {
       dialog.setOnSubmitListener(() => {
         const dates = document.getElementsByClassName("date");
         if (dates.length === 0) {
-          console.log("새로생성");
           this.day = new DayComponent();
           this.page.addChild(this.day, this.today);
         } else {
           if (dates[0].textContent !== this.today) {
-            console.log("없음");
             this.day = new DayComponent();
             this.page.addChild(this.day, this.today);
-            console.log(this.page);
           }
         }
         const section = makeSection(input);
@@ -120,8 +102,7 @@ class App {
             "page-item"
           )[0]! as HTMLElement;
           const writing = pageItem.getElementsByClassName("note-container");
-          console.log(writing.length);
-          console.log(pageItem);
+
           if (writing.length > 0) {
             alert("일기당 하나의 글만 가능합니다.");
           } else {

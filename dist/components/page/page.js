@@ -49,7 +49,6 @@ var PageComponent = /** @class */ (function (_super) {
     PageComponent.prototype.addChild = function (section, dayString) {
         var _this = this;
         var nothing = this.element.querySelector(".noChild");
-        console.log(nothing);
         if (nothing !== null) {
             this.element.removeChild(nothing);
         }
@@ -59,7 +58,6 @@ var PageComponent = /** @class */ (function (_super) {
         item.setOnCloseListener(function () {
             item.removeFrom(_this.element);
             if (!_this.element.hasChildNodes()) {
-                console.log("들어옴");
                 _this.noChild();
             }
         });

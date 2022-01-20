@@ -55,7 +55,6 @@ export class PageComponent
 
   addChild(section: Component, dayString: string) {
     const nothing = this.element.querySelector(".noChild");
-    console.log(nothing);
     if (nothing !== null) {
       this.element.removeChild(nothing);
     }
@@ -65,7 +64,6 @@ export class PageComponent
     item.setOnCloseListener(() => {
       item.removeFrom(this.element);
       if (!this.element.hasChildNodes()) {
-        console.log("들어옴");
         this.noChild();
       }
     });

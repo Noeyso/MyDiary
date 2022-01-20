@@ -18,24 +18,12 @@ var App = /** @class */ (function () {
         this.day = new DayComponent();
         this.day1 = new DayComponent();
         this.today = this.makeDayString(new Date());
-        this.page.addChild(this.day1, this.makeDayString(new Date(2022, 0, 2)));
-        this.page.addChild(this.day, this.today);
+        this.page.addChild(this.day1, this.makeDayString(new Date(2022, 0, 13)));
         this.bindElementToDialog("#new-note", TextSectionInput, function (input) { return new NoteComponent(input.title, input.body); });
         this.bindElementToDialog("#new-image", ImageSectionInput, function (input) { return new ImageComponent(input.title, input.url); });
         this.bindElementToDialog("#new-emotion", EmojiSectionInput, function (input) { return new EmotionComponent(input.select); });
         this.bindElementToDialog("#new-weather", WeatherSectionInput, function (input) { return new WeatherComponent(input.select); });
         //데모 아이템
-        // this.day.addWriting(new NoteComponent("Note Title", "this is your note"));
-        // this.day.addChild(
-        //   new ImageComponent("Image Title", "https://picsum.photos/200/300")
-        // );
-        // this.day.addChild(new EmotionComponent("happy"));
-        // this.day.addChild(new WeatherComponent("windy"));
-        // this.day.addChild(
-        //   new ImageComponent("Image Title", "https://picsum.photos/200/300")
-        // );
-        // this.day.addChild(new EmotionComponent("happy"));
-        // this.day.addChild(new WeatherComponent("windy"));
         this.day1.addWriting(new NoteComponent("Note Title", "this is your note"));
         this.day1.addChild(new ImageComponent("Image Title", "https://picsum.photos/200/300"));
         this.day1.addChild(new EmotionComponent("happy"));
@@ -56,24 +44,19 @@ var App = /** @class */ (function () {
             dialog.setOnSubmitListener(function () {
                 var dates = document.getElementsByClassName("date");
                 if (dates.length === 0) {
-                    console.log("새로생성");
                     _this.day = new DayComponent();
                     _this.page.addChild(_this.day, _this.today);
                 }
                 else {
                     if (dates[0].textContent !== _this.today) {
-                        console.log("없음");
                         _this.day = new DayComponent();
                         _this.page.addChild(_this.day, _this.today);
-                        console.log(_this.page);
                     }
                 }
                 var section = makeSection(input);
                 if (selector == "#new-note") {
                     var pageItem = document.getElementsByClassName("page-item")[0];
                     var writing = pageItem.getElementsByClassName("note-container");
-                    console.log(writing.length);
-                    console.log(pageItem);
                     if (writing.length > 0) {
                         alert("일기당 하나의 글만 가능합니다.");
                     }

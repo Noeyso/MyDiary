@@ -1,5 +1,12 @@
 import { BaseComponent } from "../../component.js";
-export class NoteComponent extends BaseComponent<HTMLElement> {
+
+export interface Note {
+  title: string;
+  body: string;
+}
+export class NoteComponent extends BaseComponent<HTMLElement> implements Note {
+  private titleElement: HTMLHeadElement;
+  private contentElement: HTMLParagraphElement;
   constructor(title: string, content: string) {
     super(`<section class="note-container">
 						<div class="note__title_container">
@@ -8,14 +15,26 @@ export class NoteComponent extends BaseComponent<HTMLElement> {
 						<p class="note__content"></p>
 					</section>`);
 
-    const titleElement = this.element.querySelector(
+    this.titleElement = this.element.querySelector(
       ".note__title"
     )! as HTMLHeadElement;
-    titleElement.textContent = title;
+    this.titleElement.textContent = title;
 
-    const contentElement = this.element.querySelector(
+    this.contentElement = this.element.querySelector(
       ".note__content"
     )! as HTMLParagraphElement;
-    contentElement.textContent = content;
+    this.contentElement.textContent = content;
+  }
+  get title(): string {
+    return this.titleElement.textContent || "";
+  }
+  get body(): string {
+    return this.contentElement.textContent || "";
+  }
+  set title(text: string) {
+    this.titleElement.textContent = text;
+  }
+  set body(text: string) {
+    this.contentElement.textContent = text;
   }
 }

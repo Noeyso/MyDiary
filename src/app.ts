@@ -12,7 +12,7 @@ import { TextSectionInput } from "./components/dialog/input/text-input.js";
 import { WeatherSectionInput } from "./components/dialog/input/weather-input.js";
 import { Composable, PageComponent } from "./components/page/page.js";
 import { Day, DayComponent } from "./components/day/day.js";
-import { NoteComponent } from "./components/day/item/note.js";
+import { Note, NoteComponent } from "./components/day/item/note.js";
 import { ImageComponent } from "./components/day/item/image.js";
 import { EmotionComponent } from "./components/day/item/emotion.js";
 import { WeatherComponent } from "./components/day/item/weather.js";
@@ -25,6 +25,7 @@ type InputComponentConstructor<
 class App {
   private readonly page: Component & Composable;
   private day: Component & Day;
+  private note: Component & Note;
   private readonly day1: Component & Day;
   private readonly today: string;
   constructor(private appRoot: HTMLElement, private dialogRoot: HTMLElement) {
@@ -32,11 +33,11 @@ class App {
     this.page.attachTo(appRoot);
     this.day = new DayComponent();
     this.day1 = new DayComponent();
+    this.note = new NoteComponent("", "");
 
     this.today = this.makeDayString(new Date());
     this.page.addChild(this.day1, this.makeDayString(new Date(2022, 0, 13)));
     this.bindNoteElementToDialog("#new-note");
-    //this.bindNoteElementToDialog("#edit-button");
     this.bindElementToDialog<ImageSectionInput>(
       "#new-image",
       ImageSectionInput,
@@ -67,28 +68,14 @@ class App {
     const element = document.querySelector(selector)! as HTMLElement;
     element.addEventListener("click", () => {
       const dates = document.getElementsByClassName("date");
-      const pageItem = document.getElementsByClassName(
-        "page-item"
-      )[0]! as HTMLElement;
-      const writings = pageItem.getElementsByClassName("note-container");
 
       const dialog = new InputDialog();
       const input = new TextSectionInput();
 
       if (dates.length > 0) {
         if (dates[0].textContent === this.today) {
-          if (writings.length > 0) {
-            const writing = writings[0]! as HTMLElement;
-            const title = writing.querySelector(
-              ".note__title"
-            )! as HTMLHeadElement;
-            const body = writing.querySelector(
-              ".note__content"
-            )! as HTMLParagraphElement;
-
-            input.title = title.textContent || "";
-            input.body = body.textContent || "";
-          }
+          input.title = this.note.title;
+          input.body = this.note.body;
         }
       }
       dialog.addChild(input);
@@ -101,17 +88,25 @@ class App {
         if (dates.length === 0) {
           this.day = new DayComponent();
           this.page.addChild(this.day, this.today);
+          this.note = new NoteComponent(input.title, input.body);
+          // this.day.addWriting(this.note);
         } else {
           if (dates[0].textContent !== this.today) {
             this.day = new DayComponent();
             this.page.addChild(this.day, this.today);
+            this.note = new NoteComponent(input.title, input.body);
+            // this.day.addWriting(this.note);
+          } else {
+            console.log("들어옴");
+            this.note.title = input.title;
+            this.note.body = input.body;
           }
         }
         if (input.title == "" || input.body == "") {
           alert("제목과 내용을 모두 적어주세요.");
         } else {
-          this.day.addWriting(new NoteComponent(input.title, input.body));
           dialog.removeFrom(this.dialogRoot);
+          this.day.addWriting(this.note);
         }
       });
     });

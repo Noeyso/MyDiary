@@ -18,12 +18,32 @@ var NoteComponent = /** @class */ (function (_super) {
     __extends(NoteComponent, _super);
     function NoteComponent(title, content) {
         var _this = _super.call(this, "<section class=\"note-container\">\n\t\t\t\t\t\t<div class=\"note__title_container\">\n\t\t\t\t\t\t\t<h2 class=\"note__title\"></h2>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<p class=\"note__content\"></p>\n\t\t\t\t\t</section>") || this;
-        var titleElement = _this.element.querySelector(".note__title");
-        titleElement.textContent = title;
-        var contentElement = _this.element.querySelector(".note__content");
-        contentElement.textContent = content;
+        _this.titleElement = _this.element.querySelector(".note__title");
+        _this.titleElement.textContent = title;
+        _this.contentElement = _this.element.querySelector(".note__content");
+        _this.contentElement.textContent = content;
         return _this;
     }
+    Object.defineProperty(NoteComponent.prototype, "title", {
+        get: function () {
+            return this.titleElement.textContent || "";
+        },
+        set: function (text) {
+            this.titleElement.textContent = text;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(NoteComponent.prototype, "body", {
+        get: function () {
+            return this.contentElement.textContent || "";
+        },
+        set: function (text) {
+            this.contentElement.textContent = text;
+        },
+        enumerable: false,
+        configurable: true
+    });
     return NoteComponent;
 }(BaseComponent));
 export { NoteComponent };

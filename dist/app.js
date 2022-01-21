@@ -17,10 +17,10 @@ var App = /** @class */ (function () {
         this.page.attachTo(appRoot);
         this.day = new DayComponent();
         this.day1 = new DayComponent();
+        this.note = new NoteComponent("", "");
         this.today = this.makeDayString(new Date());
         this.page.addChild(this.day1, this.makeDayString(new Date(2022, 0, 13)));
         this.bindNoteElementToDialog("#new-note");
-        //this.bindNoteElementToDialog("#edit-button");
         this.bindElementToDialog("#new-image", ImageSectionInput, function (input) { return new ImageComponent(input.title, input.url); });
         this.bindElementToDialog("#new-emotion", EmojiSectionInput, function (input) { return new EmotionComponent(input.select); });
         this.bindElementToDialog("#new-weather", WeatherSectionInput, function (input) { return new WeatherComponent(input.select); });
@@ -35,19 +35,12 @@ var App = /** @class */ (function () {
         var element = document.querySelector(selector);
         element.addEventListener("click", function () {
             var dates = document.getElementsByClassName("date");
-            var pageItem = document.getElementsByClassName("page-item")[0];
-            var writings = pageItem.getElementsByClassName("note-container");
             var dialog = new InputDialog();
             var input = new TextSectionInput();
             if (dates.length > 0) {
                 if (dates[0].textContent === _this.today) {
-                    if (writings.length > 0) {
-                        var writing = writings[0];
-                        var title = writing.querySelector(".note__title");
-                        var body = writing.querySelector(".note__content");
-                        input.title = title.textContent || "";
-                        input.body = body.textContent || "";
-                    }
+                    input.title = _this.note.title;
+                    input.body = _this.note.body;
                 }
             }
             dialog.addChild(input);
@@ -59,19 +52,28 @@ var App = /** @class */ (function () {
                 if (dates.length === 0) {
                     _this.day = new DayComponent();
                     _this.page.addChild(_this.day, _this.today);
+                    _this.note = new NoteComponent(input.title, input.body);
+                    // this.day.addWriting(this.note);
                 }
                 else {
                     if (dates[0].textContent !== _this.today) {
                         _this.day = new DayComponent();
                         _this.page.addChild(_this.day, _this.today);
+                        _this.note = new NoteComponent(input.title, input.body);
+                        // this.day.addWriting(this.note);
+                    }
+                    else {
+                        console.log("들어옴");
+                        _this.note.title = input.title;
+                        _this.note.body = input.body;
                     }
                 }
                 if (input.title == "" || input.body == "") {
                     alert("제목과 내용을 모두 적어주세요.");
                 }
                 else {
-                    _this.day.addWriting(new NoteComponent(input.title, input.body));
                     dialog.removeFrom(_this.dialogRoot);
+                    _this.day.addWriting(_this.note);
                 }
             });
         });

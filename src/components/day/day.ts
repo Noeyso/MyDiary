@@ -44,6 +44,7 @@ export class DayComponent extends BaseComponent<HTMLElement> implements Day {
     const container = this.element.querySelector(".writing")! as HTMLElement;
     section.attachTo(container);
   }
+
   addChild(section: Component) {
     const container = this.element.querySelector(".day")! as HTMLUListElement;
     const item = new DayItemComponent();

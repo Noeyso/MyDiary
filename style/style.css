@@ -302,6 +302,9 @@ h1 {
     align-items: center;
     text-align: center;
   }
+  .header-title {
+    margin: 0;
+  }
   .custom-shape-divider-bottom svg {
     height: 30px;
   }

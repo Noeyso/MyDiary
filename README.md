@@ -26,4 +26,5 @@ TypeScript
   <img width="700" alt="스크린샷2" src="https://user-images.githubusercontent.com/48446896/150479108-e81ab23f-5111-4872-b2a2-693ffb37db17.png">
 
 - 반응형 웹입니다.
-  <img width="526" alt="스크린샷3" src="https://user-images.githubusercontent.com/48446896/150481437-644df88d-bde8-48db-8a3e-181b04c36ce0.png">
+
+  <img width="300" alt="스크린샷3" src="https://user-images.githubusercontent.com/48446896/150481437-644df88d-bde8-48db-8a3e-181b04c36ce0.png">
